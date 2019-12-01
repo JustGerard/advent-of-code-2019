@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+        <title>Advent of Code 2019</title>
+    </head>
+    <body onload="get_first_day_output()">
+        <div class="container">
+            <h1>Advent of Code 2019</h1>
+            <br/>
+            <h2>First Day</h2>
+            <table>
+                <tr>
+                    <td><a class="btn btn-outline-dark" href="./1st_day/input_data.txt" download>Input Data</a></td>
+                    <td><a class="btn btn-outline-dark" href="https://github.com/gerwis1998/advent-of-code-2019/tree/master/1st_day">Code</a></td>
+                </tr>
+            </table>
+
+            <br/>
+            <div id="first_day"></div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    </body>
+    <script>
+        function loadJSON(callback, file) {
+            const xobj = new XMLHttpRequest();
+            xobj.overrideMimeType("application/json");
+            xobj.open('GET', file, true);
+            xobj.onreadystatechange = function () {
+                  if (xobj.readyState == 4 && xobj.status == "200") {
+                    callback(xobj.responseText);
+                  }
+            };
+            xobj.send(null);
+        }
+        function get_row(name, value) {
+            const tr = document.createElement("tr");
+            const td1 = document.createElement("td");
+            td1.innerText = name;
+            const td2 = document.createElement("td");
+            td2.innerText = value;
+            tr.appendChild(td1);
+            tr.appendChild(td2);
+            return tr
+        }
+        function get_first_day_output() {
+            loadJSON(function (response) {
+                const json_data = JSON.parse(response);
+                const div = document.getElementById("first_day");
+                const table = document.createElement("table");
+                table.className = "table table-bordered";
+                for(const row in json_data){
+                    table.appendChild(get_row(row, json_data[row]));
+                }
+                div.appendChild(table)
+            }, "./1st_day/output_data.json")
+        }
+    </script>
+</html>
