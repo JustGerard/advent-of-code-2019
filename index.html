@@ -7,7 +7,7 @@
 
         <title>Advent of Code 2019</title>
     </head>
-    <body onload="get_first_day_output()">
+    <body onload="load_days()">
         <div class="container">
             <h1><a href="https://adventofcode.com/2019">Advent of Code 2019</a></h1>
             <br/>
@@ -18,9 +18,18 @@
                     <td><a class="btn btn-outline-dark" href="https://github.com/gerwis1998/advent-of-code-2019/tree/master/1st_day">Code</a></td>
                 </tr>
             </table>
-
             <br/>
             <div id="first_day"></div>
+            <br/>
+            <h2>Second Day</h2>
+            <table>
+                <tr>
+                    <td><a class="btn btn-outline-dark" href="./2nd_day/input_data.txt" download>Input Data</a></td>
+                    <td><a class="btn btn-outline-dark" href="https://github.com/gerwis1998/advent-of-code-2019/tree/master/2nd_day">Code</a></td>
+                </tr>
+            </table>
+            <br/>
+            <div id="second_day"></div>
         </div>
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -59,6 +68,24 @@
                 }
                 div.appendChild(table)
             }, "./1st_day/output_data.json")
+        }
+
+        function get_second_day_output() {
+            loadJSON(function (response) {
+                const json_data = JSON.parse(response);
+                const div = document.getElementById("second_day");
+                const table = document.createElement("table");
+                table.className = "table table-bordered";
+                for(const row in json_data){
+                    table.appendChild(get_row(row, json_data[row]));
+                }
+                div.appendChild(table)
+            }, "./2nd_day/output_data.json")
+        }
+
+        function load_days() {
+            get_first_day_output();
+            get_second_day_output();
         }
     </script>
 </html>
